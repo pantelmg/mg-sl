@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MG SiteLimiter</title>
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACnklEQVR42n2TPUtrWRSG33NykzCCxqB4QDwK2ihYGAVBMVMIfoCp0ospjIXNqWI1A/4GO7ERhcCFGVT8A37EyoQBJYUogoUgYdAoGElOsp8pvAnjDDOr2Z/vu9d62EuSft7c3PwO/Pn4+NjY3t42xhj+I8z19XXj8vLyGfhVkq2pqak/bNvm4eGB5eVlJPH29vZ5+4dRo9EAYH19na6uLhzHIZPJAPyitbU1XxKO4yCJaDTK8/Nzy6BerwNwfHxMe3s72WyW+fl5JiYmuL29rXyrVCrfRkdHVa/XNTIyopubGwFqRnN+f38v13UVjUb1+vqqQqGg/f39n7S0tMTMzAzv7+8cHR0hiZeXl9br9XqdRqNBqVSir6+PyclJZmdn6e3t5e7uzthjY2MaGBhQW1ubOjo6ND4+rmAwKMuyFAgEFAgEZNu2uru7dX5+runpaQ0PD+v09FRDQ0OWxY8cjTGyLEuWZam5LpVKkqSenh7Ztq1/BiD9nTZALpcjmUziOA7BYJBgMIjjOCSTSc7OzgDwfb8FV8YYjDFUq1VSqRSSmJubY3d3l4uLC3K5HHt7eywsLGBZFqlUimq1SlOnJqh4PE5/fz+FQuFfvyefz1MoFLi6usJ1XeLxeAuwADzPIxKJUC6XWyn6vk+tVqNSqZBOp3l6egKgXC4TiUTwPO+zhGKxaEKhELlcDoBarQbQqnFlZYXFxUUAPj4+WpxCoRDFYtFodXWVWCz2RdQcs9ksktja2sIY8wVeLBYjnU4j13WN53kGML7vt+AADA4OIol8Pt8y9n0foOF5Hq7rGkWj0edwOEwikWiJm81zcnLCzs7Ol31jDIlEgnA4TGdn54skTW5sbPx+eHj4BjT+t5c/zxoHBwflTCbzm6TJvwAsw6AB5H8n1AAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<style>
+  :root {
+    --bg: #f4f5f7; --card: #ffffff; --ink: #16181d; --muted: #5d6470; --line: #e3e6eb;
+    --accent: #2f5bea; --accent-ink: #ffffff; --ok: #1f8a4c; --warn: #b26b00; --bad: #c62f2f;
+    --bar: #e9ecf1; --input: #ffffff; --chip: #eef1f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111317; --card: #1a1d23; --ink: #e9ebef; --muted: #9aa1ad; --line: #2a2e36;
+      --accent: #6f8ff7; --accent-ink: #0d1020; --ok: #4cc27f; --warn: #e3a33b; --bad: #f06a6a;
+      --bar: #262a32; --input: #13161b; --chip: #242831;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.45 "Segoe UI Variable", "Segoe UI", system-ui, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+  header h1 { font-size: 22px; margin: 0 auto 0 0; letter-spacing: -0.01em; }
+  .brand { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .brand .logo { display: block; width: 56px; height: 56px; }
+  .brand .logo-light { display: none; }
+  @media (prefers-color-scheme: dark) { .brand .logo-dark { display: none; } .brand .logo-light { display: block; } }
+  .brand .gh { font-size: 11.5px; color: var(--muted); text-decoration: none; }
+  .brand .gh:hover { color: var(--accent); text-decoration: underline; }
+  .tagline, .strict { font-size: 12.5px; font-weight: 700; letter-spacing: .01em; }
+  .tagline { margin: -10px 0 2px; color: var(--muted); }
+  .strict { margin: 0 0 18px; color: var(--bad); }
+  .pill { border-radius: 999px; padding: 4px 12px; font-weight: 600; font-size: 12.5px; border: 1px solid var(--line); background: var(--card); }
+  .pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); } .pill.bad { color: var(--bad); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .card h2 { font-size: 15px; margin: 0 0 4px; }
+  .card .sub { color: var(--muted); margin: 0 0 14px; }
+  .banner { border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid; }
+  .banner.bad { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); background: color-mix(in srgb, var(--bad) 8%, var(--card)); }
+  .banner.info { color: var(--ink); border-color: var(--line); background: var(--card); }
+  label { display: block; font-weight: 600; font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+  input[type=text], input[type=number], input[type=password], select, textarea {
+    width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--input); color: var(--ink); font: inherit; }
+  textarea { min-height: 64px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent); border-color: var(--accent); }
+  button { font: inherit; font-weight: 600; border-radius: 8px; border: 1px solid var(--line); background: var(--card);
+           color: var(--ink); padding: 8px 14px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  button.danger { color: var(--bad); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+  .row > * { flex: 1 1 160px; }
+  .row > .shrink { flex: 0 0 auto; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .rule { border-top: 1px solid var(--line); padding: 14px 0; }
+  .rule:first-of-type { border-top: 0; padding-top: 4px; }
+  .rule-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .rule-head .name { font-weight: 600; font-size: 15px; }
+  .rule-head .left { margin-left: auto; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ok); }
+  .rule-head .left small { font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  .rule-head .left.low { color: var(--warn); }
+  .rule-head .left.bad { color: var(--bad); }
+  .rule-head .left.off { color: var(--muted); }
+  .rule-edit { display: grid; grid-template-columns: 1.2fr 2fr 110px auto auto; gap: 8px; align-items: end; margin-top: 10px; }
+  @media (max-width: 640px) { .rule-edit { grid-template-columns: 1fr; } }
+  .bar { height: 8px; background: var(--bar); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+  .bar.full > i { background: var(--bad); }
+  .meta { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+  .badge { font-size: 11.5px; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: var(--chip); color: var(--muted); }
+  .badge.bad { color: var(--bad); } .badge.ok { color: var(--ok); }
+  .check { display: flex; gap: 8px; align-items: center; font-weight: 600; color: var(--ink); }
+  .check input { width: 16px; height: 16px; }
+  .msg { min-height: 20px; margin-top: 10px; font-weight: 600; }
+  .msg.err { color: var(--bad); } .msg.ok { color: var(--ok); }
+  .savebar { position: sticky; bottom: 12px; display: none; gap: 10px; align-items: center; justify-content: flex-end;
+             background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
+             box-shadow: 0 6px 24px rgba(0,0,0,.12); }
+  .savebar.show { display: flex; }
+  .savebar span { margin-right: auto; color: var(--muted); }
+  .muted { color: var(--muted); }
+  .big { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hidden { display: none !important; }
+  .radio { display: flex; gap: 8px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .radio input { margin-top: 3px; }
+  .radio b { display: block; }
+  .grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .radio.locked { opacity: .5; cursor: not-allowed; }
+  .radio.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .radio code { font: 12px ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--muted); }
+  .card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+  .card-head h2 { margin: 0; }
+  .switch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; font-size: 13px; user-select: none; }
+  .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .switch .track { width: 38px; height: 22px; border-radius: 99px; background: var(--line); position: relative; transition: background .15s; }
+  .switch .knob { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff;
+                  box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .15s; }
+  .switch input:checked + .track { background: var(--ok); }
+  .switch input:checked + .track .knob { transform: translateX(16px); }
+  .switch input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .switch.disabled { cursor: not-allowed; opacity: .5; }
+  /* ---- statistics ---- */
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; padding: 2px; gap: 2px; background: var(--bg); }
+  .seg button { border: 0; background: transparent; padding: 6px 14px; border-radius: 7px; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+  .stats-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; }
+  @media (max-width: 420px) { .stats-grid { grid-template-columns: 1fr; } }
+  .chart { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px 8px; position: relative; min-width: 0; }
+  .chart h3 { margin: 0; font-size: 14px; display: flex; gap: 8px; align-items: center; }
+  .chart .kpis { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0 6px; color: var(--muted); font-size: 12.5px; }
+  .chart .kpis b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .chart svg { display: block; width: 100%; height: 150px; overflow: visible; }
+  .chart .grid line { stroke: var(--line); stroke-width: 1; }
+  .chart .axis text { fill: var(--muted); font-size: 10.5px; font-variant-numeric: tabular-nums; }
+  .chart .bar { fill: var(--accent); }
+  .chart .bar.today { fill: color-mix(in srgb, var(--accent) 70%, var(--card)); }
+  .chart .nodata { fill: var(--line); }
+  .chart .limit { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 3; opacity: .55; }
+  .chart .limit-label { fill: var(--muted); font-size: 10.5px; }
+  .chart .hit { fill: transparent; cursor: default; }
+  .chart .bar.hover { fill: color-mix(in srgb, var(--accent) 80%, var(--ink)); }
+  .tip { position: absolute; pointer-events: none; z-index: 5; background: var(--ink); color: var(--card); font-size: 12px;
+         padding: 6px 9px; border-radius: 7px; white-space: nowrap; transform: translate(-50%, calc(-100% - 8px)); display: none; }
+  .tip b { font-variant-numeric: tabular-nums; }
+  .stats-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .stats-table th, .stats-table td { text-align: right; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+  .stats-table th:first-child, .stats-table td:first-child { text-align: left; }
+  .stats-table th { color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <img class="logo logo-dark" src="data:image/png;base64,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" alt="MG SiteLimiter logo" width="56" height="56">
+      <img class="logo logo-light" src="data:image/png;base64,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" alt="MG SiteLimiter logo" width="56" height="56">
+      <a class="gh" href="https://github.com/pantelmg" target="_blank" rel="noopener noreferrer">github.com/pantelmg</a>
+    </div>
+    <h1>MG SiteLimiter</h1>
+    <span id="pillEnf" class="pill">…</span>
+    <span id="pillLock" class="pill">…</span>
+    <span id="pillReset" class="pill muted">…</span>
+  </header>
+  <p class="tagline">A productivity tool that globally limits website usage across all browsers in a Windows device</p>
+  <p class="strict" role="note">WARNING: This is a strict limiter! Be careful.</p>
+
+  <div id="noToken" class="banner bad hidden">This page needs its access key. Open the dashboard from the MG gauge icon in the system tray.</div>
+  <div id="offline" class="banner bad hidden">Can't reach the MG SiteLimiter service. It may be restarting.</div>
+  <div id="warnings"></div>
+
+  <!-- Lock -->
+  <section class="card" id="lockTypeCard">
+    <h2>Lock</h2>
+    <p class="sub" id="lockTypeSub"></p>
+    <div class="grid4" id="modeChoices"></div>
+    <div class="grid2" style="margin-top:12px" id="lockFields">
+      <div id="lockPwWrap"><label for="lockPw" id="lockPwLabel">Password</label><input id="lockPw" type="password" autocomplete="new-password"></div>
+      <div id="lockPw2Wrap"><label for="lockPw2">Repeat password</label><input id="lockPw2" type="password" autocomplete="new-password"></div>
+      <div id="lockDelayWrap"><label for="lockDelayHours">Waiting period (hours)</label><input id="lockDelayHours" type="number" min="1" max="720" value="24"></div>
+    </div>
+    <div class="row" style="margin-top:14px" id="lockSaveRow"><button class="primary shrink" id="lockSave">Save lock</button></div>
+    <div id="lockTypeMsg" class="msg"></div>
+  </section>
+
+  <!-- Unlock -->
+  <section class="card" id="lockCard">
+    <h2>Unlock</h2>
+    <p class="sub" id="lockSub"></p>
+    <div id="lockUnlocked" class="hidden">
+      <div class="row"><div><span class="big" id="unlockedLeft"></span> <span class="muted" id="unlockedSuffix">left in this unlock</span></div>
+        <button class="shrink" id="lockNow">Lock now</button></div>
+    </div>
+    <div id="lockPassword" class="hidden">
+      <div class="row">
+        <div><label for="unlockPw">Password</label><input id="unlockPw" type="password" autocomplete="current-password"></div>
+        <button class="primary shrink" id="unlockPwBtn">Unlock</button>
+      </div>
+    </div>
+    <div id="lockDelay" class="hidden" style="margin-top:14px">
+      <div id="delayIdle" class="row"><div class="muted" id="delayIdleText"></div><button class="shrink" id="requestUnlock">Start waiting period</button></div>
+      <div id="delayWaiting" class="row hidden">
+        <div><span class="big" id="delayLeft"></span> <span class="muted">until you can unlock</span></div>
+        <button class="shrink" id="cancelUnlock">Cancel request</button>
+      </div>
+      <div id="delayReady" class="row hidden">
+        <div><b>The waiting period is over.</b> <span class="muted" id="readyExpires"></span></div>
+        <button class="primary shrink" id="claimUnlock">Unlock now</button>
+        <button class="shrink" id="cancelUnlock2">Cancel</button>
+      </div>
+    </div>
+    <div id="lockMsg" class="msg"></div>
+  </section>
+
+  <!-- Limits -->
+  <section class="card">
+    <div class="card-head">
+      <h2>Limits</h2>
+      <label class="switch" id="limitsSwitchWrap" title="Turning limits off needs an unlock. Turning them on is always allowed.">
+        <input type="checkbox" id="limitsSwitch" role="switch"><span class="track"><span class="knob"></span></span>
+        <span id="limitsSwitchText">On</span>
+      </label>
+    </div>
+    <div id="limitsMsg" class="msg" style="min-height:0;margin:0 0 6px"></div>
+    <p class="sub" id="limitsHint">Each limit covers the listed domains and all their subdomains. A pack shares one budget across all of its sites.</p>
+    <div id="rules"></div>
+    <div class="rule" style="border-top:1px solid var(--line); margin-top:4px">
+      <div class="rule-edit">
+        <div><label for="newName">Name</label><input id="newName" type="text" placeholder="Social media"></div>
+        <div><label for="newDomains">Domains (comma separated)</label><input id="newDomains" type="text" placeholder="youtube.com, reddit.com"></div>
+        <div><label for="newLimit">Min / day</label><input id="newLimit" type="number" min="0" max="1440" value="30"></div>
+        <div class="shrink"><button class="primary" id="addRule">Add</button></div>
+        <div></div>
+      </div>
+      <div class="meta">0 minutes = Always blocked.</div>
+    </div>
+  </section>
+
+  <!-- Cloudflare -->
+  <section class="card" id="cfCard">
+    <h2>Cloudflare 1.1.1.1 DNS Resolver</h2>
+    <p class="sub" id="cfSub"></p>
+    <div class="grid3" id="cfChoices"></div>
+    <p class="meta" id="cfNote" style="margin-top:10px"></p>
+    <div id="cfMsg" class="msg"></div>
+  </section>
+
+  <!-- Settings -->
+  <section class="card">
+    <h2>Settings</h2>
+    <p class="sub">Changes that would loosen limits need an unlock.</p>
+    <div class="grid2">
+      <div><label for="sReset">Daily reset time</label><select id="sReset"></select></div>
+      <div><label for="sIdle">Stop counting after idle</label><select id="sIdle">
+        <option value="0">Don't stop</option><option value="60">1 minute</option><option value="120">2 minutes</option>
+        <option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option>
+        <option value="1800">30 minutes</option><option value="3600">1 hour</option></select></div>
+      <div><label for="sWindow">Unlock lasts</label><select id="sWindow">
+        <option value="0">Until locked again</option><option value="5">5 minutes</option><option value="10">10 minutes</option>
+        <option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option>
+        <option value="120">2 hours</option><option value="240">4 hours</option></select></div>
+      <div style="align-self:end"><label class="check"><input id="sFail" type="checkbox"> Block everything limited if the tracker isn't running</label></div>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div><label for="sBrowsers">Browser processes tracked</label><textarea id="sBrowsers"></textarea></div>
+      <div><label for="sDns">Upstream DNS servers (optional)</label><textarea id="sDns" placeholder="Leave empty to use your network's DNS"></textarea>
+        <div class="meta hidden" id="sDnsNote">Not used: The Cloudflare resolver is active.</div></div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="card" id="statsCard">
+    <div class="stats-head">
+      <div><h2>Statistics</h2><p class="sub" style="margin:0" id="statsSub">Time spent per site or pack.</p></div>
+      <div class="seg" role="group" aria-label="Period">
+        <button id="segDaily" aria-pressed="true">Daily</button>
+        <button id="segWeekly" aria-pressed="false">Weekly</button>
+      </div>
+    </div>
+    <div id="statsGrid" class="stats-grid"></div>
+    <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Show as table</summary>
+      <div id="statsTable" style="overflow-x:auto"></div></details>
+  </section>
+
+  <!-- Uninstall -->
+  <section class="card" id="uninstallCard">
+    <h2>Uninstall</h2>
+    <p class="sub" id="uninstallSub"></p>
+    <div id="uninstallBox" class="row hidden" style="margin-bottom:14px">
+      <div><b id="uninstallText"></b></div>
+      <button class="primary shrink" id="cancelUninstall">Cancel uninstall</button>
+    </div>
+    <p class="muted" style="margin-top:0">Restores your DNS settings and browser policies, then allows MG SiteLimiter to be removed for 1 hour.
+      After this, run <b>MGSL Uninstaller.exe</b> (Settings → Apps → MG SiteLimiter, or C:\Program Files\SiteLimiter).</p>
+    <button class="danger needs-unlock" id="prepUninstall">Prepare uninstall</button>
+    <p id="uninstallReady" class="msg ok hidden"></p>
+    <div id="uninstallMsg" class="msg"></div>
+  </section>
+
+  <div class="savebar" id="savebar"><span id="savebarText">Unsaved time limit changes</span>
+    <button id="discard">Discard</button><button class="primary" id="save">Save changes</button></div>
+  <div id="saveMsg" class="msg" style="text-align:right"></div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  let token = "";
+  try {
+    const m = /[#&]t=([0-9a-f]+)/.exec(location.hash);
+    if (m) { token = m[1]; try { sessionStorage.setItem("slt", token); } catch {} history.replaceState(null, "", location.pathname); }
+    else { try { token = sessionStorage.getItem("slt") || ""; } catch {} }
+  } catch {}
+
+  let S = null;            // last server state
+  let draft = null;        // editable copy of rules + settings
+  let dirty = false;
+  let clockSkew = 0;       // server.now - Date.now()
+
+  async function api(path, body) {
+    const res = await fetch(path, {
+      method: body === undefined ? "GET" : "POST",
+      headers: { "X-SL-Token": token, ...(body === undefined ? {} : { "Content-Type": "application/json" }) },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+    let data = {};
+    try { data = await res.json(); } catch {}
+    if (!res.ok) throw new Error(data.error || ("HTTP " + res.status));
+    return data;
+  }
+
+  function msg(el, text, ok) {
+    el.textContent = text || "";
+    el.className = "msg " + (text ? (ok ? "ok" : "err") : "");
+  }
+
+  const now = () => Date.now() + clockSkew;
+  const fmtDur = (ms) => {
+    if (ms <= 0) return "0:00";
+    const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), ss = s % 60;
+    return h ? `${h}h ${String(m).padStart(2, "0")}m` : `${m}:${String(ss).padStart(2, "0")}`;
+  };
+  const fmtTime = (iso) => new Date(iso).toLocaleString([], { weekday: "short", hour: "2-digit", minute: "2-digit" });
+  const fmtLeft = (sec) => sec >= 3600 ? `${Math.floor(sec / 3600)}h ${String(Math.floor(sec % 3600 / 60)).padStart(2, "0")}m`
+    : sec >= 300 ? `${Math.floor(sec / 60)}m` : `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
+  const fmtMin = (sec) => sec >= 3600 ? `${Math.floor(sec / 3600)}h ${Math.floor(sec % 3600 / 60)}m` : `${Math.floor(sec / 60)}m`;
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const MODES = [
+    ["None", "No lock", "Anyone can change or turn off everything."],
+    ["Password", "Password", "Someone you trust keeps the password."],
+    ["Delay", "Waiting period", "Request an unlock, then wait (default 24 h)."],
+    ["PasswordOrDelay", "Either", "Password for instant unlock, or wait it out."],
+  ];
+  function renderModes(container, name, selected) {
+    container.innerHTML = MODES.map(([v, t, d]) =>
+      `<label class="radio"><input type="radio" name="${name}" value="${v}" ${v === selected ? "checked" : ""}><span><b>${t}</b><span class="muted">${d}</span></span></label>`).join("");
+  }
+  const chosen = (name) => (document.querySelector(`input[name=${name}]:checked`) || {}).value;
+
+  // ---------------------------------------------------------------- render
+  function render() {
+    if (!S) return;
+    const unlocked = S.unlocked, mode = S.protection.mode, enf = S.enforcement;
+
+    const pe = $("pillEnf");
+    if (enf.uninstallPreparedUntil) { pe.textContent = "Ready to uninstall"; pe.className = "pill bad"; }
+    else if (enf.limitsOff) { pe.textContent = "Limits off"; pe.className = "pill warn"; }
+    else { pe.textContent = "Limits on"; pe.className = "pill ok"; }
+    const pl = $("pillLock");
+    if (mode === "None") { pl.textContent = "No lock"; pl.className = "pill warn"; }
+    else if (unlocked) { pl.textContent = "Unlocked"; pl.className = "pill warn"; }
+    else { pl.textContent = "Locked"; pl.className = "pill ok"; }
+    $("pillReset").textContent = "Resets " + fmtTime(S.nextReset);
+
+    $("warnings").innerHTML = S.warnings.map((w) => `<div class="banner bad">${esc(w)}</div>`).join("");
+
+    renderLockType();
+
+    const sw = $("limitsSwitch"), canToggle = !enf.uninstallPreparedUntil && (unlocked || enf.limitsOff);
+    sw.checked = !enf.limitsOff;
+    sw.disabled = !canToggle;
+    $("limitsSwitchWrap").classList.toggle("disabled", !canToggle);
+    $("limitsSwitchText").textContent = enf.limitsOff ? "Off" : "On";
+    $("limitsHint").textContent = enf.limitsOff
+      ? "Limits are off: Nothing is blocked. Time is still counted for statistics."
+      : !unlocked
+      ? "Locked: You can add limits, add domains and lower limits. Raising, removing or disabling a limit needs an unlock."
+      : "Each limit covers the listed domains and all their subdomains. A pack shares one budget across all of its sites.";
+
+    renderRules();
+    renderCloudflare();
+    renderLock();
+    if (!dirty) renderSettings();
+
+    // uninstall
+    document.querySelectorAll(".needs-unlock").forEach((b) => (b.disabled = !unlocked));
+    const prepared = !!enf.uninstallPreparedUntil;
+    $("uninstallSub").textContent = prepared ? "" : unlocked ? "You're unlocked." : "Locked: Unlock first to uninstall.";
+    $("uninstallBox").classList.toggle("hidden", !prepared);
+    $("uninstallText").textContent = "Uninstall prepared — Limits are off until it's removed or this expires.";
+    $("prepUninstall").classList.toggle("hidden", prepared);
+    $("uninstallReady").classList.toggle("hidden", !prepared);
+    if (prepared) $("uninstallReady").textContent = `Ready. Run MGSL Uninstaller.exe before ${fmtTime(enf.uninstallPreparedUntil)}.`;
+  }
+
+  function renderRules() {
+    const byId = Object.fromEntries(S.rules.map((r) => [r.id, r]));
+    const rows = draft.rules.map((r, i) => {
+      const live = byId[r.id];
+      const used = live ? live.usedSeconds : 0;
+      const limit = r.dailyLimitMinutes * 60;
+      const pct = limit ? Math.min(100, used / limit * 100) : 100;
+      const blocked = live && live.blocked;
+      const left = Math.max(0, limit - used);
+      const resetAt = new Date(S.nextReset).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const status = !r.enabled ? `<span class="left off">Off</span>`
+        : !live ? `<span class="left off"><small>save to start</small></span>`
+        : limit === 0 ? `<span class="left bad">Always blocked</span>`
+        : blocked || left === 0 ? `<span class="left bad">0m left <small>· back at ${resetAt}</small></span>`
+        : `<span class="left ${left < 300 ? "low" : ""}">${fmtLeft(left)} left <small>of ${fmtMin(limit)}</small></span>`;
+      return `<div class="rule" data-i="${i}">
+        <div class="rule-head"><span class="name">${esc(r.name || r.domains[0] || "New limit")}</span>
+          <span class="badge">${r.domains.length > 1 ? "pack · " + r.domains.length + " sites" : "site"}</span>${status}</div>
+        <div class="bar ${pct >= 100 ? "full" : ""}"><i style="width:${pct}%"></i></div>
+        <div class="meta">${fmtMin(used)} used of ${r.dailyLimitMinutes ? fmtMin(limit) : "0m (always blocked)"} today</div>
+        <div class="rule-edit">
+          <div><label>Name</label><input type="text" data-f="name" value="${esc(r.name)}"></div>
+          <div><label>Domains</label><input type="text" data-f="domains" value="${esc(r.domains.join(", "))}"></div>
+          <div><label>Min / day</label><input type="number" min="0" max="1440" data-f="dailyLimitMinutes" value="${r.dailyLimitMinutes}"></div>
+          <div class="shrink"><label class="check" style="margin-bottom:8px"><input type="checkbox" data-f="enabled" ${r.enabled ? "checked" : ""}> On</label></div>
+          <div class="shrink"><button class="danger" data-remove="${i}">Remove</button></div>
+        </div></div>`;
+    });
+    const host = $("rules");
+    const focused = document.activeElement && host.contains(document.activeElement) ? document.activeElement : null;
+    if (focused) { // don't rebuild under the user's cursor; just refresh bars
+      host.querySelectorAll(".rule").forEach((el, i) => {
+        const tmp = document.createElement("div"); tmp.innerHTML = rows[i] || "";
+        const fresh = tmp.firstElementChild; if (!fresh) return;
+        el.querySelector(".bar").replaceWith(fresh.querySelector(".bar"));
+        el.querySelector(".left").replaceWith(fresh.querySelector(".left"));
+        el.querySelector(".meta").replaceWith(fresh.querySelector(".meta"));
+      });
+      return;
+    }
+    host.innerHTML = rows.join("") || `<p class="muted">No limits yet. Add a site or a pack below.</p>`;
+  }
+
+  // Lock card: which lock type. Keeps the user's unsaved choice until the server's mode changes.
+  let lockShownMode = null;
+  function renderLockType() {
+    const p = S.protection, cur = p.mode;
+    if (lockShownMode !== cur) {
+      renderModes($("modeChoices"), "lockMode", cur);
+      $("lockDelayHours").value = p.delayHours;
+      lockShownMode = cur;
+    }
+    const sel = chosen("lockMode") || cur;
+    const usesPw = sel === "Password" || sel === "PasswordOrDelay", usesDelay = sel === "Delay" || sel === "PasswordOrDelay";
+    $("lockPwWrap").classList.toggle("hidden", !usesPw);
+    $("lockPw2Wrap").classList.toggle("hidden", !usesPw);
+    $("lockDelayWrap").classList.toggle("hidden", !usesDelay);
+    $("lockPwLabel").textContent = p.hasPassword ? "New password (blank = Keep)" : "Password";
+    $("lockSave").textContent = sel === "None" ? "Remove lock" : "Save lock";
+    $("lockFields").classList.toggle("hidden", !usesPw && !usesDelay);
+    $("lockSaveRow").classList.toggle("hidden", sel === "None" && cur === "None");  // nothing to save
+    $("lockTypeSub").textContent = cur === "None"
+      ? "No lock: Anyone can change or turn off everything. Add your limits first, then choose a lock."
+      : !S.unlocked
+      ? "Locked: You can make the lock stricter (e.g. a longer waiting period). Other changes need an unlock."
+      : "Choose how MG SiteLimiter can be unlocked. Saving locks it right away.";
+  }
+
+  function renderLock() {
+    const p = S.protection, l = S.lock, mode = p.mode;
+    if (mode === "None") {
+      $("lockSub").textContent = "No lock is set, so everything is unlocked.";
+      for (const id of ["lockUnlocked", "lockPassword", "lockDelay"]) $(id).classList.add("hidden");
+      return;
+    }
+    const isPw = mode === "Password" || mode === "PasswordOrDelay";
+    const isDelay = mode === "Delay" || mode === "PasswordOrDelay";
+    $("lockSub").textContent = S.unlocked ? "Unlocked: You can loosen limits, turn them off, change the lock or uninstall."
+      : mode === "Password" ? "Enter the password to unlock." :
+        mode === "Delay" ? `Unlocking takes a ${p.delayHours}-hour waiting period.` :
+        `Enter the password, or wait ${p.delayHours} hours.`;
+    $("lockUnlocked").classList.toggle("hidden", !S.unlocked);
+    $("lockPassword").classList.toggle("hidden", S.unlocked || !isPw);
+    $("lockDelay").classList.toggle("hidden", S.unlocked || !isDelay);
+    const waiting = l.requestedAt && !l.ready, ready = !!l.ready;
+    $("delayIdle").classList.toggle("hidden", !!l.requestedAt);
+    $("delayWaiting").classList.toggle("hidden", !waiting);
+    $("delayReady").classList.toggle("hidden", !ready);
+    $("delayIdleText").textContent = `Starts a ${p.delayHours}-hour countdown. You can cancel it any time.`;
+    if (ready) $("readyExpires").textContent = `Available until ${fmtTime(l.readyExpiresAt)}.`;
+    tick();
+  }
+
+  function tick() {
+    if (!S) return;
+    if (S.unlocked && S.lock.indefinite) {
+      $("unlockedLeft").textContent = "Until you lock it";
+      $("unlockedSuffix").textContent = "";
+    } else if (S.unlocked && S.lock.unlockedUntil) {
+      const left = new Date(S.lock.unlockedUntil) - now();
+      if (left <= 0) {            // expired: show "Locked" right away, then confirm with the service
+        S.unlocked = false; S.lock.unlockedUntil = null;
+        render(); refresh();
+        return;
+      }
+      $("unlockedLeft").textContent = fmtDur(left);
+      $("unlockedSuffix").textContent = "left in this unlock";
+    }
+    if (S.lock.readyAt && !S.lock.ready) $("delayLeft").textContent = fmtDur(new Date(S.lock.readyAt) - now());
+  }
+
+  // keeps an older/custom value selectable if it isn't one of the presets
+  function setSelect(sel, value, label) {
+    if (![...sel.options].some((o) => +o.value === value)) sel.add(new Option(label(value), value));
+    sel.value = String(value);
+  }
+
+  function renderSettings() {
+    const s = draft.settings;
+    const sel = $("sReset");
+    if (!sel.options.length)
+      for (let h = 0; h < 24; h++) sel.add(new Option(`${String(h).padStart(2, "0")}:00${h === 0 ? " (midnight)" : ""}`, h));
+    sel.value = s.resetHour;
+    setSelect($("sIdle"), s.idleTimeoutSeconds, (v) => `${v} seconds`);
+    setSelect($("sWindow"), s.unlockWindowMinutes, (v) => `${v} minutes`);
+    $("sFail").checked = s.failClosed;
+    $("sBrowsers").value = s.browserProcesses.join(", ");
+    $("sDns").value = s.upstreamDns.join(", ");
+  }
+
+  // ---------------------------------------------------------------- editing
+  const splitList = (v) => v.split(/[\s,;]+/).map((x) => x.trim()).filter(Boolean);
+  let dirtyRules = false, dirtySettings = false;
+  function markDirty(kind) {
+    dirty = true;
+    if (kind === "settings") dirtySettings = true; else dirtyRules = true;
+    $("savebarText").textContent = dirtyRules && dirtySettings ? "Unsaved time limit and settings changes"
+      : dirtySettings ? "Unsaved settings changes" : "Unsaved time limit changes";
+    $("savebar").classList.add("show"); msg($("saveMsg"), "");
+  }
+  function resetDraft() {
+    draft = JSON.parse(JSON.stringify({ rules: S.rules.map(({ id, name, domains, dailyLimitMinutes, enabled }) =>
+      ({ id, name, domains, dailyLimitMinutes, enabled })), settings: S.settings }));
+    dirty = dirtyRules = dirtySettings = false; $("savebar").classList.remove("show");
+  }
+
+  $("rules").addEventListener("input", (e) => {
+    const f = e.target.dataset.f; if (!f) return;
+    const r = draft.rules[+e.target.closest(".rule").dataset.i];
+    if (f === "domains") r.domains = splitList(e.target.value);
+    else if (f === "dailyLimitMinutes") r.dailyLimitMinutes = Math.max(0, parseInt(e.target.value || "0", 10));
+    else if (f === "enabled") r.enabled = e.target.checked;
+    else r[f] = e.target.value;
+    markDirty();
+  });
+  $("rules").addEventListener("click", (e) => {
+    const i = e.target.dataset.remove; if (i === undefined) return;
+    draft.rules.splice(+i, 1); markDirty(); document.activeElement.blur(); renderRules();
+  });
+  $("addRule").onclick = () => {
+    const domains = splitList($("newDomains").value);
+    if (!domains.length) { msg($("saveMsg"), "Enter at least one domain."); $("newDomains").focus(); return; }
+    draft.rules.push({ id: "", name: $("newName").value.trim(), domains,
+      dailyLimitMinutes: Math.max(0, parseInt($("newLimit").value || "0", 10)), enabled: true });
+    $("newName").value = ""; $("newDomains").value = "";
+    markDirty(); renderRules();
+  };
+  for (const [id, key, conv] of [["sReset", "resetHour", Number], ["sIdle", "idleTimeoutSeconds", Number],
+      ["sWindow", "unlockWindowMinutes", Number], ["sFail", "failClosed", null],
+      ["sBrowsers", "browserProcesses", splitList], ["sDns", "upstreamDns", splitList]]) {
+    $(id).addEventListener(id === "sFail" || $(id).tagName === "SELECT" ? "change" : "input", (e) => {
+      draft.settings[key] = conv ? conv(e.target.value) : e.target.checked; markDirty("settings");
+    });
+  }
+  $("discard").onclick = () => { resetDraft(); document.activeElement.blur(); render(); };
+  $("save").onclick = async () => {
+    try {
+      await api("/api/config", draft);
+      dirty = dirtyRules = dirtySettings = false; $("savebar").classList.remove("show");
+      document.activeElement.blur();
+      await refresh(); resetDraft(); render(); refreshStats();
+      msg($("saveMsg"), "Saved.", true);
+    } catch (e) { msg($("saveMsg"), e.message); }
+  };
+
+  // ---------------------------------------------------------------- actions
+  async function act(el, path, body, okText) {
+    try { await api(path, body || {}); msg(el, okText || "", true); await refresh(); }
+    catch (e) { msg(el, e.message); await refresh(); }
+  }
+  document.addEventListener("change", (e) => { if (e.target.name === "lockMode") renderLockType(); });
+  $("lockSave").onclick = async () => {
+    const mode = chosen("lockMode"), usesPw = mode === "Password" || mode === "PasswordOrDelay";
+    const pw = $("lockPw").value, pw2 = $("lockPw2").value;
+    if (usesPw && pw !== pw2) return msg($("lockTypeMsg"), "Passwords don't match.");
+    if (usesPw && !pw && !S.protection.hasPassword) return msg($("lockTypeMsg"), "Choose a password.");
+    if (mode === "None" && !confirm("Remove the lock? Anyone will be able to change or turn off your limits.")) return;
+    await act($("lockTypeMsg"), "/api/protection",
+      { mode, delayHours: +$("lockDelayHours").value || 24, password: usesPw && pw ? pw : null },
+      mode === "None" ? "No lock is set." : "Lock saved. All settings are locked now.");
+    $("lockPw").value = ""; $("lockPw2").value = "";
+    lockShownMode = null; render();
+  };
+  $("unlockPwBtn").onclick = () => { act($("lockMsg"), "/api/unlock/password", { password: $("unlockPw").value }, "Unlocked."); $("unlockPw").value = ""; };
+  $("unlockPw").addEventListener("keydown", (e) => { if (e.key === "Enter") $("unlockPwBtn").click(); });
+  $("requestUnlock").onclick = () => act($("lockMsg"), "/api/unlock/request", {}, "Waiting period started.");
+  $("cancelUnlock").onclick = $("cancelUnlock2").onclick = () => act($("lockMsg"), "/api/unlock/cancel", {}, "Request cancelled.");
+  $("claimUnlock").onclick = () => act($("lockMsg"), "/api/unlock/claim", {}, "Unlocked.");
+  $("lockNow").onclick = () => act($("lockMsg"), "/api/lock", {}, "Locked.");
+  // ---------------------------------------------------------------- cloudflare
+  const CF = [
+    ["Inactive", "Inactive", "Your network's DNS (or the upstream servers in Settings).", ""],
+    ["Malware", "Block malware", "Known malware and phishing sites.", "1.1.1.2 · 1.0.0.2"],
+    ["MalwareAndAdult", "Block malware and adult content", "Also adult content.", "1.1.1.3 · 1.0.0.3"],
+  ];
+  const cfRank = (m) => CF.findIndex((c) => c[0] === m);
+  function renderCloudflare() {
+    const cur = S.cloudflare || "Inactive", locked = !S.unlocked && !S.enforcement.uninstallPreparedUntil;
+    const box = $("cfChoices");
+    if (!box.innerHTML) {
+      box.innerHTML = CF.map(([v, t, d, ips]) =>
+        `<label class="radio" data-v="${v}"><input type="radio" name="cfMode" value="${v}"><span><b>${t}</b>` +
+        `<span class="muted">${d}</span>${ips ? `<br><code>${ips}</code>` : ""}</span></label>`).join("");
+      box.addEventListener("change", (e) => {
+        if (e.target.name !== "cfMode") return;
+        act($("cfMsg"), "/api/cloudflare", { mode: e.target.value }, "Saved. DNS lookups now follow this choice.");
+      });
+    }
+    box.querySelectorAll(".radio").forEach((el) => {
+      const v = el.dataset.v, input = el.querySelector("input");
+      input.checked = v === cur;
+      el.classList.toggle("on", v === cur);
+      const blocked = locked && cfRank(v) < cfRank(cur);   // less strict than now
+      input.disabled = blocked;
+      el.classList.toggle("locked", blocked);
+      el.title = blocked ? "Making DNS filtering less strict needs an unlock." : "";
+    });
+    $("cfSub").textContent = locked && cur !== "Inactive"
+      ? "Locked: You can make filtering stricter. Making it less strict needs an unlock."
+      : "Every lookup that isn't blocked by a limit is answered by Cloudflare's filtering resolver.";
+    $("cfNote").textContent = cur === "Inactive" ? ""
+      : "Windows shows your DNS server as 127.0.0.1 — That's MG SiteLimiter, which forwards to Cloudflare. " +
+        "DNS changes made in Windows Settings are reverted within seconds.";
+    $("sDns").disabled = cur !== "Inactive";
+    $("sDnsNote").classList.toggle("hidden", cur === "Inactive");
+  }
+
+  $("limitsSwitch").addEventListener("change", (e) => {
+    const on = e.target.checked;
+    if (!on && !confirm("Turn all limits off? Nothing will be blocked until you turn them back on.")) { e.target.checked = true; return; }
+    act($("limitsMsg"), "/api/limits", { on }, "");
+  });
+  $("cancelUninstall").onclick = () => act($("uninstallMsg"), "/api/uninstall/cancel", {}, "Uninstall cancelled. Limits are back on.");
+  $("prepUninstall").onclick = () => {
+    if (!confirm("Turn off all limits and locks so MG SiteLimiter can be uninstalled?")) return;
+    act($("uninstallMsg"), "/api/uninstall/prepare", {}, "");
+  };
+
+  // ---------------------------------------------------------------- polling
+  async function refresh() {
+    if (!token) { $("noToken").classList.remove("hidden"); return; }
+    try {
+      S = await api("/api/state");
+      clockSkew = new Date(S.now) - Date.now();
+      $("offline").classList.add("hidden");
+      if (!draft || !dirty) resetDraft();
+      render();
+    } catch (e) {
+      if (/token/i.test(e.message)) $("noToken").classList.remove("hidden");
+      else $("offline").classList.remove("hidden");
+    }
+  }
+  // ---------------------------------------------------------------- statistics
+  let ST = null, statsMode = "daily";
+  const DAY_MS = 86400000;
+  const parseDay = (k) => { const [y, m, d] = k.split("-").map(Number); return new Date(y, m - 1, d); };
+  const dayLabel = (k, opts) => parseDay(k).toLocaleDateString([], opts);
+  const fmtDur2 = (sec) => {                       // 0m, 45m, 1h 05m
+    const m = Math.round(sec / 60);
+    return m >= 60 ? `${Math.floor(m / 60)}h ${String(m % 60).padStart(2, "0")}m` : `${m}m`;
+  };
+  const tickLabel = (min) => min === 0 ? "0" : min % 60 === 0 ? `${min / 60}h` : min >= 60 ? `${Math.floor(min / 60)}h${min % 60}` : `${min}m`;
+
+  // buckets: [{key, label, long, sec(by rule id), noData}]
+  function buckets() {
+    const days = ST.days, first = ST.firstDay;
+    if (statsMode === "daily") {
+      return days.slice(-14).map((d) => ({
+        key: d.day, label: dayLabel(d.day, { weekday: "short" }).slice(0, 2) + " " + parseDay(d.day).getDate(),
+        long: dayLabel(d.day, { weekday: "long", day: "numeric", month: "short" }) + (d.day === ST.today ? " (today)" : ""),
+        usage: d.usage, noData: d.day < first, today: d.day === ST.today,
+        complete: d.day >= first && d.day !== ST.today,
+      }));
+    }
+    // weekly: Monday-based weeks, last 12 including the current (partial) one
+    const out = [];
+    const today = parseDay(ST.today);
+    const monday = new Date(today.getTime() - ((today.getDay() + 6) % 7) * DAY_MS);
+    for (let w = 11; w >= 0; w--) {
+      const start = new Date(monday.getTime() - w * 7 * DAY_MS);
+      const keys = []; for (let i = 0; i < 7; i++) {
+        const d = new Date(start.getTime() + i * DAY_MS);
+        keys.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
+      }
+      const usage = {};
+      for (const d of days) if (keys.includes(d.day)) for (const [id, s] of Object.entries(d.usage)) usage[id] = (usage[id] || 0) + s;
+      const end = new Date(start.getTime() + 6 * DAY_MS);
+      out.push({
+        key: keys[0], label: start.toLocaleDateString([], { day: "numeric", month: "short" }),
+        long: `${start.toLocaleDateString([], { day: "numeric", month: "short" })} – ${end.toLocaleDateString([], { day: "numeric", month: "short" })}` + (w === 0 ? " (this week)" : ""),
+        usage, noData: keys[6] < first, today: w === 0,
+        complete: w !== 0 && keys[0] >= first,
+      });
+    }
+    return out;
+  }
+
+  function niceStep(maxMin) {
+    for (const s of [5, 10, 15, 30, 60, 120, 180, 240, 360, 600, 720, 1200, 1440, 2880])
+      if (maxMin / s <= 4) return s;
+    return 5760;
+  }
+
+  function chartSvg(rule, bs, width) {
+    const H = 150, padL = 34, padR = 8, padT = 10, padB = 22;
+    const W = Math.max(240, width), plotW = W - padL - padR, plotH = H - padT - padB;
+    const vals = bs.map((b) => (b.usage[rule.id] || 0) / 60);            // minutes
+    const limitMin = rule.dailyLimitMinutes * (statsMode === "weekly" ? 7 : 1);
+    const top = Math.max(...vals, limitMin, 10);
+    const step = niceStep(top), yMax = Math.ceil(top / step) * step;
+    const y = (m) => padT + plotH - (m / yMax) * plotH;
+    const band = plotW / bs.length, gap = 2, bw = Math.min(28, band - gap), r = Math.min(4, bw / 2);
+    const labelEvery = Math.max(1, Math.ceil(38 / band));
+    let g = `<g class="grid">`;
+    for (let m = 0; m <= yMax; m += step) g += `<line x1="${padL}" x2="${W - padR}" y1="${y(m)}" y2="${y(m)}"/>`;
+    g += `</g><g class="axis">`;
+    for (let m = 0; m <= yMax; m += step) g += `<text x="${padL - 6}" y="${y(m) + 3.5}" text-anchor="end">${tickLabel(m)}</text>`;
+    bs.forEach((b, i) => {
+      const fromEnd = bs.length - 1 - i;            // always label the most recent bar
+      if (fromEnd % labelEvery === 0) g += `<text x="${padL + band * i + band / 2}" y="${H - 6}" text-anchor="middle">${esc(b.label)}</text>`;
+    });
+    g += `</g>`;
+    let bars = "";
+    bs.forEach((b, i) => {
+      const cx = padL + band * i + band / 2, x = cx - bw / 2, v = vals[i];
+      const base = y(0);
+      if (b.noData) {
+        bars += `<rect class="nodata" x="${x}" y="${base - 1}" width="${bw}" height="1"/>`;
+      } else if (v > 0) {
+        const h = Math.max(2, base - y(v)), rr = Math.min(r, h);
+        bars += `<path class="bar ${b.today ? "today" : ""}" data-i="${i}" d="M${x},${base}V${base - h + rr}Q${x},${base - h} ${x + rr},${base - h}H${x + bw - rr}Q${x + bw},${base - h} ${x + bw},${base - h + rr}V${base}Z"/>`;
+      }
+      bars += `<rect class="hit" data-i="${i}" x="${padL + band * i}" y="${padT}" width="${band}" height="${plotH}"/>`;
+    });
+    let limit = "";
+    if (limitMin > 0) {
+      limit = `<line class="limit" x1="${padL}" x2="${W - padR}" y1="${y(limitMin)}" y2="${y(limitMin)}"/>` +
+        `<text class="limit-label" x="${W - padR}" y="${y(limitMin) - 4}" text-anchor="end">limit ${tickLabel(limitMin)}</text>`;
+    }
+    const total = vals.reduce((a, v) => a + v, 0);
+    const label = `${rule.name}: ${statsMode} usage, total ${fmtDur2(total * 60)}`;
+    return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">${g}${limit}${bars}</svg>`;
+  }
+
+  function renderStats() {
+    const grid = $("statsGrid");
+    if (!ST) return;
+    const rules = ST.rules;
+    $("statsCard").classList.toggle("hidden", rules.length === 0);
+    if (!rules.length) return;
+    const bs = buckets();
+    const tracked = Math.round((parseDay(ST.today) - parseDay(ST.firstDay)) / DAY_MS) + 1;
+    $("statsSub").textContent = statsMode === "daily"
+      ? `Minutes per day, last 14 days${tracked < 14 ? ` (tracking for ${tracked} day${tracked > 1 ? "s" : ""})` : ""}. Dashed line = Daily limit.`
+      : "Total per week (Monday–Sunday), last 12 weeks. Dashed line = 7 × daily limit.";
+    grid.innerHTML = rules.map((rule) => {
+      const secs = bs.map((b) => b.usage[rule.id] || 0);
+      const cur = secs[secs.length - 1];
+      // averages use completed days/weeks only (not today/this week, not a partial first week)
+      const done = secs.filter((_, i) => bs[i].complete);
+      const avg = done.length ? done.reduce((a, v) => a + v, 0) / done.length : null;
+      const kind = rule.domains.length > 1 ? `pack · ${rule.domains.length} sites` : "site";
+      const k = statsMode === "daily"
+        ? `<span>Today <b>${fmtDur2(cur)}</b></span><span>Avg/day <b>${avg === null ? "–" : fmtDur2(avg)}</b></span><span>This week <b>${fmtDur2(weekSum(rule.id))}</b></span>`
+        : `<span>This week <b>${fmtDur2(cur)}</b></span><span>Avg/week <b>${avg === null ? "–" : fmtDur2(avg)}</b></span><span>Daily limit <b>${rule.dailyLimitMinutes ? fmtDur2(rule.dailyLimitMinutes * 60) : "blocked"}</b></span>`;
+      return `<div class="chart" data-rule="${esc(rule.id)}">
+        <h3>${esc(rule.name)} <span class="badge">${kind}</span>${rule.enabled ? "" : ' <span class="badge">off</span>'}</h3>
+        <div class="kpis">${k}</div><div class="plot"></div><div class="tip"></div></div>`;
+    }).join("");
+    // second pass: draw each chart at its real width so text and bars are never stretched
+    grid.querySelectorAll(".chart").forEach((card) => {
+      const rule = rules.find((r) => r.id === card.dataset.rule), plot = card.querySelector(".plot");
+      plot.innerHTML = chartSvg(rule, bs, plot.clientWidth);
+    });
+
+    // hover tooltips
+    grid.querySelectorAll(".chart").forEach((card) => {
+      const rule = rules.find((r) => r.id === card.dataset.rule), tip = card.querySelector(".tip"), svg = card.querySelector("svg");
+      svg.querySelectorAll(".hit").forEach((hit) => {
+        hit.addEventListener("mouseenter", () => {
+          const b = bs[+hit.dataset.i], sec = b.usage[rule.id] || 0;
+          const lim = rule.dailyLimitMinutes * 60 * (statsMode === "weekly" ? 7 : 1);
+          tip.innerHTML = `${esc(b.long)}<br><b>${b.noData ? "not tracked yet" : fmtDur2(sec)}</b>` +
+            (!b.noData && lim > 0 ? ` of ${fmtDur2(lim)}` : "");
+          const box = hit.getBoundingClientRect(), cb = card.getBoundingClientRect();
+          tip.style.left = Math.min(Math.max(box.left - cb.left + box.width / 2, 70), cb.width - 70) + "px";
+          tip.style.top = (box.top - cb.top + 4) + "px";
+          tip.style.display = "block";
+          svg.querySelector(`.bar[data-i="${hit.dataset.i}"]`)?.classList.add("hover");
+        });
+        hit.addEventListener("mouseleave", () => {
+          tip.style.display = "none";
+          svg.querySelector(".bar.hover")?.classList.remove("hover");
+        });
+      });
+    });
+
+    // table view (accessibility / exact numbers)
+    const head = `<tr><th>${statsMode === "daily" ? "Day" : "Week of"}</th>${rules.map((r) => `<th>${esc(r.name)}</th>`).join("")}</tr>`;
+    const rows = bs.slice().reverse().map((b) => `<tr><td>${esc(b.long)}</td>${rules.map((r) =>
+      `<td>${b.noData ? "–" : fmtDur2(b.usage[r.id] || 0)}</td>`).join("")}</tr>`).join("");
+    $("statsTable").innerHTML = `<table class="stats-table">${head}${rows}</table>`;
+  }
+
+  function weekSum(id) {
+    const today = parseDay(ST.today), dow = (today.getDay() + 6) % 7;
+    return ST.days.slice(-(dow + 1)).reduce((a, d) => a + (d.usage[id] || 0), 0);
+  }
+
+  async function refreshStats() {
+    if (!token) return;
+    try { ST = await api("/api/stats"); renderStats(); } catch {}
+  }
+  for (const [id, mode] of [["segDaily", "daily"], ["segWeekly", "weekly"]]) {
+    $(id).onclick = () => {
+      statsMode = mode;
+      $("segDaily").setAttribute("aria-pressed", mode === "daily");
+      $("segWeekly").setAttribute("aria-pressed", mode === "weekly");
+      renderStats();
+    };
+  }
+  let resizeT; window.addEventListener("resize", () => { clearTimeout(resizeT); resizeT = setTimeout(renderStats, 150); });
+
+  // background tabs throttle timers: re-sync as soon as the tab is shown again
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) { refresh(); refreshStats(); } });
+
+  refresh();
+  refreshStats();
+  setInterval(refreshStats, 30000);
+  setInterval(refresh, 5000);
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
